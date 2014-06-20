@@ -33,9 +33,12 @@ public class UILApplication extends Application {
 	@SuppressWarnings("unused")
 	@Override
 	public void onCreate() {
-		if (Config.DEVELOPER_MODE && Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-			StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectAll().penaltyDialog().build());
-			StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyDeath().build());
+		if (Config.DEVELOPER_MODE
+				&& Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+			StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+					.detectAll().penaltyDialog().build());
+			StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+					.detectAll().penaltyDeath().build());
 		}
 
 		super.onCreate();
@@ -44,17 +47,17 @@ public class UILApplication extends Application {
 	}
 
 	public static void initImageLoader(Context context) {
-		// This configuration tuning is custom. You can tune every option, you may tune some of them, 
+		// This configuration tuning is custom. You can tune every option, you
+		// may tune some of them,
 		// or you can create default configuration by
-		//  ImageLoaderConfiguration.createDefault(this);
+		// ImageLoaderConfiguration.createDefault(this);
 		// method.
-		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
-				.threadPriority(Thread.NORM_PRIORITY - 2)
+		ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
+				context).threadPriority(Thread.NORM_PRIORITY - 2)
 				.denyCacheImageMultipleSizesInMemory()
 				.discCacheFileNameGenerator(new Md5FileNameGenerator())
 				.tasksProcessingOrder(QueueProcessingType.LIFO)
-				.enableLogging() // Not necessary in common
-				.build();
+				.discCacheSize(500 * 1024 * 1024).enableLogging().build();
 		// Initialize ImageLoader with configuration.
 		ImageLoader.getInstance().init(config);
 	}

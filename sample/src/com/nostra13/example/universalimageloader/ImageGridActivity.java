@@ -47,19 +47,17 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
 		imageUrls = bundle.getStringArray(Extra.IMAGES);
 
 		options = new DisplayImageOptions.Builder()
-			.showStubImage(R.drawable.ic_stub)
-			.showImageForEmptyUri(R.drawable.ic_empty)
-			.showImageOnFail(R.drawable.ic_error)
-			.cacheInMemory()
-			.cacheOnDisc()
-			.bitmapConfig(Bitmap.Config.RGB_565)
-			.build();
+				.showStubImage(R.drawable.ic_stub)
+				.showImageForEmptyUri(R.drawable.ic_empty)
+				.showImageOnFail(R.drawable.ic_error).cacheInMemory()
+				.cacheOnDisc().bitmapConfig(Bitmap.Config.RGB_565).build();
 
 		listView = (GridView) findViewById(R.id.gridview);
 		((GridView) listView).setAdapter(new ImageAdapter());
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
 				startImagePagerActivity(position);
 			}
 		});
@@ -92,13 +90,12 @@ public class ImageGridActivity extends AbsListViewBaseActivity {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final ImageView imageView;
 			if (convertView == null) {
-				imageView = (ImageView) getLayoutInflater().inflate(R.layout.item_grid_image, parent, false);
+				imageView = (ImageView) getLayoutInflater().inflate(
+						R.layout.item_grid_image, parent, false);
 			} else {
 				imageView = (ImageView) convertView;
 			}
-
 			imageLoader.displayImage(imageUrls[position], imageView, options);
-
 			return imageView;
 		}
 	}

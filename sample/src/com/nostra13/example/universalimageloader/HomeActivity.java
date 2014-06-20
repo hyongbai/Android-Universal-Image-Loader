@@ -40,7 +40,7 @@ public class HomeActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ac_home);
-
+		Constants.INIT();
 		File testImageOnSdCard = new File("/mnt/sdcard", TEST_FILE_NAME);
 		if (!testImageOnSdCard.exists()) {
 			copyTestImageToSdCard(testImageOnSdCard);
@@ -83,7 +83,8 @@ public class HomeActivity extends BaseActivity {
 			public void run() {
 				try {
 					InputStream is = getAssets().open(TEST_FILE_NAME);
-					FileOutputStream fos = new FileOutputStream(testImageOnSdCard);
+					FileOutputStream fos = new FileOutputStream(
+							testImageOnSdCard);
 					byte[] buffer = new byte[8192];
 					int read;
 					try {
